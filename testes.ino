@@ -4,7 +4,7 @@ unsigned long Teste() {
 }
 
 unsigned long CalculaTempo() {
-  unsigned long tempo
+  unsigned long tempo;
   if (tempoEmit > tempoDebug) {
     tempo = tempoDebug - tempoEmit;
     Serial.print("\n\nTempo de conexão até retorno: ");
@@ -13,7 +13,8 @@ unsigned long CalculaTempo() {
   else if (tempoConexao > tempoDebug) {
     tempo = tempoDebug - tempoConexao;
     Serial.print("\n\nTempo de teste: ");
-    Serial.println(tempo);
+    Serial.println(tempo); 
   }
+  Serial.flush();
 }
 

@@ -13,11 +13,6 @@
 #define luz D2
 
 String JSON;
-StaticJsonBuffer<100> jsonBuffer;
-
-JsonObject& root = jsonBuffer.createObject();
-root["serial"] = serial;  //  root["time"] = 1351824120;   //  JsonArray& data = root.createNestedArray("data");  //  data.add(double_with_n_digits(48.756080, 6));  //  data.add(double_with_n_digits(2.302038, 6));
-root.printTo(JSON);
 
 SocketIOClient socket;
 
@@ -32,6 +27,10 @@ unsigned long previousMillis = 0;
 
 
 void setup() {
+  StaticJsonBuffer<100> jsonBuffer;
+  JsonObject& root = jsonBuffer.createObject();
+  root["serial"] = serial;  //  root["time"] = 1351824120;   //  JsonArray& data = root.createNestedArray("data");  //  data.add(double_with_n_digits(48.756080, 6));  //  data.add(double_with_n_digits(2.302038, 6));
+  root.printTo(JSON);
 
   WiFiManager wifs;
   wifs.autoConnect();
@@ -52,7 +51,7 @@ void setup() {
     socket.emit("/post/dispositivo/", JSON);
 
     tempoConexao = millis();
-    Seiral.print("\n\n\ntempo conexão: ");
+    Serial.print("\n\n\ntempo conexão: ");
     Serial.println(tempoConexao);
   }
   socket.on("atuar", Atuar);
